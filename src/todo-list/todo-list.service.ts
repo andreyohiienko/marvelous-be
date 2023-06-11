@@ -17,8 +17,14 @@ export class TodoListService {
     });
   }
 
-  findAll(): Promise<TodoListItem[]> {
-    return this.todolistItem.findAll({ order: ['description'] });
+  findAll(status: string): Promise<TodoListItem[]> {
+    const s = { done: true, undone: false };
+    return this.todolistItem.findAll({
+      order: ['description'],
+      where: {
+        ...(status ? { status: s[status] } : {}),
+      },
+    });
   }
 
   findOne(id: number) {
