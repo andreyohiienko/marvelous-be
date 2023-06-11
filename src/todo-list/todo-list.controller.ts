@@ -40,11 +40,8 @@ export class TodoListController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.todoListService.remove(+id);
-  }
+    if (id === 'all') return this.todoListService.removeAll();
 
-  @Delete()
-  removeAll() {
-    return this.todoListService.removeAll();
+    return this.todoListService.remove(+id);
   }
 }

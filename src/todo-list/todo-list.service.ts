@@ -38,7 +38,6 @@ export class TodoListService {
     });
   }
 
-  @Delete('all')
   removeAll() {
     return this.todolistItem.destroy({
       truncate: true,
