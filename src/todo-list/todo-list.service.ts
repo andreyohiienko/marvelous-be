@@ -18,7 +18,7 @@ export class TodoListService {
   }
 
   findAll(): Promise<TodoListItem[]> {
-    return this.todolistItem.findAll();
+    return this.todolistItem.findAll({ order: ['description'] });
   }
 
   findOne(id: number) {
