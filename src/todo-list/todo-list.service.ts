@@ -33,7 +33,6 @@ export class TodoListService {
   }
 
   remove(id: number) {
-    console.log(id);
     return this.todolistItem.destroy({
       where: { id },
     });
