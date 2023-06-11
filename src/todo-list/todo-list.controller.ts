@@ -42,4 +42,9 @@ export class TodoListController {
   remove(@Param('id') id: string) {
     return this.todoListService.remove(+id);
   }
+
+  @Delete()
+  removeAll() {
+    return this.todoListService.removeAll();
+  }
 }

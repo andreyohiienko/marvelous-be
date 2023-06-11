@@ -1,1 +1,3 @@
-export class CreateTodoListDto {}
+export class CreateTodoListDto {
+  public description: string;
+}
