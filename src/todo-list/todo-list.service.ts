@@ -1,8 +1,9 @@
-import { Delete, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateTodoListDto } from './dto/create-todo-list.dto';
 import { UpdateTodoListDto } from './dto/update-todo-list.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { TodoListItem } from './todo-list.model';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class TodoListService {
@@ -20,15 +21,25 @@ export class TodoListService {
   findAll({
     status,
     limit,
+    search,
   }: {
     status?: string;
     limit?: number;
+    search?: string;
   }): Promise<TodoListItem[]> {
     const s = { done: true, undone: false };
+    console.log('search', search);
     return this.todolistItem.findAll({
       order: ['description'],
       where: {
         ...(status ? { status: s[status] } : {}),
+        ...(search
+          ? {
+              description: {
+                [Op.like]: `%${search}%`,
+              },
+            }
+          : {}),
       },
       limit,
     });

@@ -22,8 +22,12 @@ export class TodoListController {
   }
 
   @Get()
-  findAll(@Query('status') status: string, @Query('limit') limit: number) {
-    return this.todoListService.findAll({ status, limit });
+  findAll(
+    @Query('status') status: string,
+    @Query('limit') limit: number,
+    @Query('search') search: string,
+  ) {
+    return this.todoListService.findAll({ status, limit, search });
   }
 
   @Get(':id')
